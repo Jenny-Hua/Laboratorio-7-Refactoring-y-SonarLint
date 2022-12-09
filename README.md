@@ -82,19 +82,33 @@ se esperaba que el test de esta funcionalidad no pasara
 ![Test](./img/add_test.png)
 
 ## 3. Refactorización del código
-Una vez comprobadó el funcionamiento correcto del código 
+Una vez comprobadó el funcionamiento correcto del código se aplicaron las siguientes técnicas de refactorización:
+* Se extrajeron varias clases items:  **aged_brie_item, sulfuras_item, backstage_item y conjured_item** porque cada uno 
+tenia un comportamiento diferente para actualizar calidad. Estas se convirtieron en clases hijas de la clase padre Item
+* Se movió el **método update_quality** de la clase GildedRose a la clase Item y luego se aplicó polimorfismo sobre este método 
+en las clases hijas de Item.
 
 ## 4. Implementación de la nueva funcionalidad
-
-
+* Se creo una clase hija de Item llamada conjured_item, donde se actualizó el comportamiento
+del método actualizar item
+ ```
+   class conjured_item (Item):
+       def update_quality(self):
+           if self.quality > 2:
+               self.quality = self.quality - 2
+           else:
+               self.quality = 0
+   
+           self.sell_in = self.sell_in - 1
+ ```
 ## 5. Verificación y validación de las actualizaciones 
 Para esta tarea se volvió a usar **SonarLint** y se obtuvo el siguiente resultado:
 
-![Code Smells](img/sonarlint_01.png)
+![SonarLint](img/sonar_02.png)
 
 Se puede observar que el código de esta vez no se detectó ninguna violación de reglas ni *issues*.
 
 Por otro lado, también se re-ejecutarón las Pruebas para verificar que el código funcione
 correctamente:
 
-![Code Smells](img/sonarlint_01.png)
+![Test post refactorización](img/test_02.png)

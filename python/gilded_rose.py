@@ -1,4 +1,16 @@
 # -*- coding: utf-8 -*-
+
+def create_item(name, sell_in, quality):
+    if name == "Aged Brie":
+        return aged_brie_item(name, sell_in, quality)
+    if name == "Sulfuras, Hand of Ragnaros":
+        return sulfuras_item(name, sell_in, quality)
+    if name == "Backstage passes to a TAFKAL80ETC concert":
+        return backstage_item(name, sell_in, quality)
+    if name == "Conjured Mana Cake":
+        return conjured_item(name, sell_in, quality)
+    else:
+        return Item(name, sell_in, quality)
 class GildedRose(object):
     def __init__(self, items):
         self.items = items
@@ -6,19 +18,8 @@ class GildedRose(object):
     def update_quality(self):
         for item in self.items:
             item.update_quality()
+# class create_item(object):
 
-class ItemFactory(object):
-    def create(self, name, sell_in, quality):
-        if name == "Aged Brie":
-            return aged_brie_item(name, sell_in, quality)
-        if name == "Sulfuras, Hand of Ragnaros":
-            return sulfuras_item(name, sell_in, quality)
-        if name == "Backstage passes to a TAFKAL80ETC concert":
-            return backstage_item(name, sell_in, quality)
-        if name == "Conjured Mana Cake":
-            return conjured_item(name, sell_in, quality)
-        else:
-            return Item(name, sell_in, quality)
 class Item(object):
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -44,7 +45,8 @@ class aged_brie_item (Item):
             self.sell_in = self.sell_in - 1
 
 class sulfuras_item (Item):
-    pass
+    def update_quality(self):
+        pass
 
 class backstage_item (Item):
     def update_quality(self):
